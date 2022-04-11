@@ -1,0 +1,21 @@
+#datipersonali{
+    float: left;
+    width: 70%;
+    margin: 0 auto;
+    position: absolute;
+    top: 150%;
+    left: 5%;
+}
+
+#immagine{
+    width: 20%;
+    clear: left;
+    margin: 0 auto;
+    position: absolute;
+    top: 80%;
+    left: 80%;
+}
+
+#tabella{
+
+}

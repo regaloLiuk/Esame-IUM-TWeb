@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pagina Principale</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Profilo.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <style type="text/css">
+        /* Chart.js  metodo per animazioni
+        @-webkit-keyframes chartjs-render-animation{
+            from{opacity:0.99}
+            to{opacity:1}
+        }@keyframes chartjs-render-animation{
+                 from{opacity:0.99}
+                 to{opacity:1}
+        }.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;
+                       animation:chartjs-render-animation 0.001s;
+        }*/
+    </style>
+</head>
+<body>
+<form method="post"/>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <div class="navbar-brand col-sm-3 col-md-2 mr-0">
+        <div id="username" class="outputTextArea"></div>
+    </div>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <!--form method="post"/-->
+            <button type="button" id="logout" class="btn btn-link">Sign out</button>
+            <!--/form-->
+        </li>
+    </ul>
+</nav>
+</form>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="prenota()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            Ripetizioni
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <!li class="nav-item">
+                        <a class="nav-link" href="#" onclick = "storicoWeb()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            Storico
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="impostazioni()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
+                                <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                            Impostazioni
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+                    </div>
+                </div>
+            </div>
+
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="85" height="35" style="display: block; width: 85px; height: 35px;"></canvas>
+
+            <div id="pagina">
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="GIORNI">Giorno</label>
+                        </div>
+                        <select class="custom-select" id="GIORNI" name="GIORNI">
+                            <option selected>giorno</option>
+                            <option value="lunedì">lunedì</option>
+                            <option value="martedì">martedì</option>
+                            <option value="mercoledì">mercoledì</option>
+                            <option value="giovedì">giovedì</option>
+                            <option value="venerdì">venerdì</option>
+                        </select>
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ORARI">Ora</label>
+                        </div>
+                        <select class="custom-select" id="ORARI" name="ORARI">
+                            <option selected>ora</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                        </select>
+                    </div>
+
+                    <div id="outCorsi" class="outputTextArea"></div>
+                    <div id="outDocenti" class="outputTextArea"></div>
+
+                    <input type="button" value="cerca" onclick="cerca()" class="btn btn-primary btn-lg">
+                    <div id="ripetizioniWeb" class="outputTextArea"></div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function prenota() {
+        var ris =   "                    <div class=\"input-group mb-3\">\n" +
+                    "                        <div class=\"input-group-prepend\">\n" +
+                    "                            <label class=\"input-group-text\" for=\"GIORNI\">Giorno</label>\n" +
+                    "                        </div>\n" +
+                    "                        <select class=\"custom-select\" id=\"GIORNI\" name=\"GIORNI\">\n" +
+                    "                            <option selected>giorno</option>\n" +
+                    "                            <option value=\"lunedì\">lunedì</option>\n" +
+                    "                            <option value=\"martedì\">martedì</option>\n" +
+                    "                            <option value=\"mercoledì\">mercoledì</option>\n" +
+                    "                            <option value=\"giovedì\">giovedì</option>\n" +
+                    "                            <option value=\"venerdì\">venerdì</option>\n" +
+                    "                        </select>\n" +
+                    "                        <div class=\"input-group-prepend\">\n" +
+                    "                            <label class=\"input-group-text\" for=\"ORARI\">Ora</label>\n" +
+                    "                        </div>\n" +
+                    "                        <select class=\"custom-select\" id=\"ORARI\" name=\"ORARI\">\n" +
+                    "                            <option selected>ora</option>\n" +
+                    "                            <option value=\"15\">15</option>\n" +
+                    "                            <option value=\"16\">16</option>\n" +
+                    "                            <option value=\"17\">17</option>\n" +
+                    "                            <option value=\"18\">18</option>\n" +
+                    "                            <option value=\"19\">19</option>\n" +
+                    "                        </select>\n" +
+                    "                    </div>\n" +
+                    "               <form method=\"post\">\n" +
+                    "                    <div id=\"outCorsi\" class=\"outputTextArea\"></div>\n" +
+                    "                    <div id=\"outDocenti\" class=\"outputTextArea\"></div>\n" +
+                    "                </form>\n"+
+                    "                    <input type=\"button\" value=\"cerca\" onclick=\"cerca()\" class=\"btn btn-primary btn-lg\">\n" +
+                    "                    <div id=\"ripetizioniWeb\" class=\"outputTextArea\"></div>";
+        document.getElementById("pagina").innerHTML = ris;
+
+        //recupera materie per selta ripetizione
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "corsi"}, // POST to WeatherServlet!!
+                function (data) {// callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    var d = "<div id=\"corsi\" class=\"input-group mb-3\">\n" +
+                        "<div class=\"input-group-prepend\">\n" +
+                        "<label class=\"input-group-text\" for=\"MATERIE\">Materie</label>\n" +
+                        "</div>\n" +
+                        "<select class=\"custom-select\" id=\"MATERIE\" name=\"MATERIE\">"+
+                        "<option selected>materia</option>\n";
+                    for (var i = 0; i < obj.Corsi.length; i++) {
+                        var counter = obj.Corsi[i];
+                        d += "<option>" + counter.materia+ "</option>\n";
+                    }
+                    d+= "</select>\n" +
+                        "</div>";
+                    $("#outCorsi").html(d); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+
+        //recupera professori per selta ripetizione
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "docenti"}, // POST to WeatherServlet!!
+                function (data) {// callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    var c = "<div id=\"docenti\" class=\"input-group mb-3\">\n" +
+                        "<div class=\"input-group-prepend\">\n" +
+                        "<label class=\"input-group-text\" for=\"PROFESSORI\">Professori</label>\n" +
+                        "</div>\n" +
+                        "<select class=\"custom-select\" id=\"PROFESSORI\" name=\"PROFESSORI\">\n"+
+                        " <option selected>professore</option>";
+                    for (var i = 0; i < obj.Docenti.length; i++) {
+                        var counter = obj.Docenti[i];
+                        c += "<option value=\""+ counter.ID +"\">" + counter.NOME + " " + counter.COGNOME +"</option>\n";
+                    }
+                    c+= "</select>\n" +
+                        "</div>";
+                    $("#outDocenti").html(c); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+    }
+
+    function cerca() {
+        $(document).ready(function () { // When the DOM of this page is constructed
+            var mat = document.getElementById("MATERIE").value;//sets "city" to value of "cityName" from DOM
+            var prof = document.getElementById("PROFESSORI").value;//sets "city" to value of "cityName" from DOM
+            var ora = document.getElementById("ORARI").value;//sets "city" to value of "cityName" from DOM
+            var gg = document.getElementById("GIORNI").value;//sets "city" to value of "cityName" from DOM
+            $.post("Servlet", {mat: mat, prof: prof, ora: ora, gg: gg, action: "ripetizioniWeb"}, // POST to WeatherServlet!!
+                function (data) {   // callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    if(obj.Ripetizioni == null)
+                        alert("inserire parametri di ricerca");
+                    var tab = "<table class=\"table\">\n" +
+                        "  <thead>\n" +
+                        "    <tr>\n" +
+                        "      <th scope=\"col\">Materia</th>\n" +
+                        "      <th scope=\"col\">Professore</th>\n" +
+                        "      <th scope=\"col\">Giorno</th>\n" +
+                        "      <th scope=\"col\">Ora</th>\n" +
+                        "    </tr>\n" +
+                        "  </thead>\n" +
+                        "  <tbody>";
+                    for (var i = 0; i < obj.Ripetizioni.length; i++) {
+                        var counter = obj.Ripetizioni[i];
+                        tab += "<tr>\n" +
+                            "      <th>" + counter.MATERIA + "</th>\n" +
+                            "      <td>" + counter.PROF + "</td>\n" +
+                            "      <td>" + counter.GIORNO + "</td>\n" +
+                            "      <td>" + counter.ORA + "</td>\n" +
+                            "    </tr>";
+                    }
+                    tab += "</tbody>\n" +
+                        "</table>";
+                    $("#ripetizioniWeb").html(tab); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+    }
+
+    function storicoWeb() {
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "storicoWeb"}, // POST to WeatherServlet!!
+                function (data) {   // callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    if(obj.Storico == null)
+                        $("#storicoWeb").html("Non ci sono ripretizioni prenotate");
+                    var tab =  "    <table class= \"table\">\n" +
+                        "    <thead>\n" +
+                        "    <tr>\n" +
+                        "        <th>Utente</th>\n" +
+                        "        <th>Materia</th>\n" +
+                        "        <th>Professore</th>\n" +
+                        "        <th>Giorno</th>\n" +
+                        "        <th>Ora</th>\n" +
+                        "        <th>Stato</th>\n" +
+                        "    </tr>\n" +
+                        "    </thead>\n" +
+                        "    <tbody>\n";
+
+                    for (var i = 0; i < obj.Storico.length; i++) {
+                        var counter = obj.Storico[i];
+                            tab +=  "<tr>\n" +
+                                "      <th>" + counter.UTENTE + "</th>\n" +
+                                "      <th>" + counter.MATERIA + "</th>\n" +
+                                "      <td>" + counter.PROF + "</td>\n" +
+                                "      <td>" + counter.GIORNO + "</td>\n" +
+                                "      <td>" + counter.ORA + "</td>\n" +
+                                "      <td>" + counter.STATO + "</td>\n" +
+                                "</tr>";
+                    }
+                    tab +=  "    </tbody>\n" +
+                        "    </table>\n";
+
+                    $("#pagina").html(tab); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+    }
+
+    function impostazioni(){
+        var tab =   "<div class=\"col-md-8 order-md-1\">\n" +
+            "    <h4 class=\"mb-3\">Aggiungi professore</h4>\n" +
+            "    <form class=\"needs-validation\" novalidate=\"\">\n" +
+            "        <div class=\"row\">\n" +
+            "            <div class=\"col-md-6 mb-3\">\n" +
+            "                <label for=\"firstName\">Nome</label>\n" +
+            "                <input type=\"text\" class=\"form-control\" id=\"firstName\" placeholder=\"\" value=\"\" required=\"\">\n" +
+            "                <div class=\"invalid-feedback\">\n" +
+            "                    Valid first name is required.\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "            <div class=\"col-md-6 mb-3\">\n" +
+            "                <label for=\"lastName\">Cognome</label>\n" +
+            "                <input type=\"text\" class=\"form-control\" id=\"lastName\" placeholder=\"\" value=\"\" required=\"\">\n" +
+            "                <div class=\"invalid-feedback\">\n" +
+            "                    Valid last name is required.\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"mb-3\">\n" +
+            "            <label for=\"materia\">Materia</label>\n" +
+            "            <input type=\"email\" class=\"form-control\" id=\"materia\" placeholder=\"materia\">\n" +
+            "            <div class=\"invalid-feedback\">\n" +
+            "                Please enter a valid email address for shipping updates.\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <input id=\"addprof\" type=\"button\" value=\"Aggiungi\" class=\"btn btn-primary btn-lg btn-block\">\n" +
+            "        <hr class=\"mb-4\">\n" +
+            "        <h4 class=\"mb-3\">Aggiungi Corso</h4>\n" +
+            "        <div class=\"row\">\n" +
+            "           <div id=\"outDocenti\" class=\"outputTextArea\"></div>\n" +
+            "           <div class=\"col-md-5 mb-3\">\n" +
+            "                <label for=\"inputMateria\">Materia</label>\n" +
+            "                <input type=\"text\" class=\"form-control\" id=\"inputMateria\" placeholder=\"\" required=\"\">\n" +
+            "                <div class=\"invalid-feedback\">\n" +
+            "                    Materia required.\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <input id=\"addcorso\" type=\"button\" value=\"Aggiungi\" class=\"btn btn-primary btn-lg btn-block\">\n" +
+            "        <hr class=\"mb-4\">\n" +
+            "        <h4 class=\"mb-3\">Rimuovi Professore</h4>\n" +
+            "        <div class=\"row\" >\n" +
+            "           <div id=\"outDocenti1\" class=\"outputTextArea\"></div>\n" +
+            "        </div>\n"+
+            "        <input id=\"removeprof\" type=\"button\" value=\"Rimuovi\" class=\"btn btn-primary btn-lg btn-block\">\n" +
+            "        <hr class=\"mb-4\">\n" +
+            "        <h4 class=\"mb-3\">Rimuovi Corso</h4>\n" +
+            "        <div class=\"row\">\n" +
+            "           <div id=\"outCorsi\" class=\"outputTextArea\"></div>\n" +
+            "        </div>\n" +
+            "        <input id=\"removecorso\" type=\"button\" value=\"Rimuovi\" class=\"btn btn-primary btn-lg btn-block\">\n" +
+            "    </form>\n" +
+            "</div>\n";
+        document.getElementById("pagina").innerHTML = tab;
+
+        //recupera professori per selta aggiunta
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "docenti"}, // POST to WeatherServlet!!
+                function (data) {// callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    var c = "<label for=\"PROFESSORI\">Professori</label>\n" +
+                            "<select class=\"custom-select\" id=\"PROFESSORI\" name=\"PROFESSORI\">\n"+
+                            " <option selected>professore</option>";
+                    for (var i = 0; i < obj.Docenti.length; i++) {
+                        var counter = obj.Docenti[i];
+                        c += "<option value=\""+ counter.ID +"\">" + counter.NOME + " " + counter.COGNOME +"</option>\n";
+                    }
+                    c+= "</select>\n";
+                    $("#outDocenti").html(c); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+
+        //recupera professori per selta eliminazione
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "docenti"}, // POST to WeatherServlet!!
+                function (data) {// callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    var c = "<label for=\"PROFESSORI1\">Professori</label>\n" +
+                            "<select class=\"custom-select\" id=\"PROFESSORI1\" name=\"PROFESSORI1\">\n"+
+                            "<option selected>professore</option>";
+                    for (var i = 0; i < obj.Docenti.length; i++) {
+                        var counter = obj.Docenti[i];
+                        c += "<option value=\""+ counter.ID +"\">" + counter.NOME + " " + counter.COGNOME +"</option>\n";
+                    }
+                    c+= "</select>\n";
+                    $("#outDocenti1").html(c); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+
+        //recupera materie per selta eliminazione
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "insegnamenti"}, // POST to WeatherServlet!!
+                function (data) {// callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    var d = "<label for=\"MATERIE\">Corsi</label>\n" +
+                            "<select class=\"custom-select\" id=\"CORSI\" name=\"CORSI\">"+
+                            "<option selected>corso</option>\n";
+                    for (var i = 0; i < obj.Insegnamenti.length; i++) {
+                        var counter = obj.Insegnamenti[i];
+                        d += "<option value=\"" + counter.IDPROF + " " + counter.MATERIA + "\">" + counter.PROF + " - " + counter.MATERIA + "</option>\n";
+                    }
+                    d+= "</select>\n" +
+                    $("#outCorsi").html(d); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                });
+        });
+
+        //intercetta bottone per aggiungere professore
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $("#addprof").click(function () {// on click of getWeatherReport button do ...
+                var nome = document.getElementById("firstName").value;//sets "city" to value of "cityName" from DOM
+                var cognome = document.getElementById("lastName").value;//sets "city" to value of "cityName" from DOM
+                var materia = document.getElementById("materia").value;//sets "city" to value of "cityName" from DOM
+                $.post("Servlet", {nome: nome, cognome: cognome, materia: materia, action: "aggiungiProf"}, // POST to WeatherServlet!!
+                    function (data) {   // callBack function
+                        console.log('-' + data + '-');
+                        if(data === "ok")
+                            alert("aggiunto nouvo professore");
+                        else if(data === "noData")
+                            alert("inserire nome cognome o materia");
+                        else
+                            alert("ERRORE")
+                    });
+            });
+        });
+        //intercetta bottone per aggiungere corso
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $("#addcorso").click(function () {// on click of getWeatherReport button do ...
+                var prof = document.getElementById("PROFESSORI").value;//sets "city" to value of "cityName" from DOM
+                var materia = document.getElementById("inputMateria").value;//sets "city" to value of "cityName" from DOM
+                $.post("Servlet", {professore: prof, materia: materia, action: "aggiungiCorso"}, // POST to WeatherServlet!!
+                    function (data) {   // callBack function
+                        console.log('-' + data + '-');
+                        if(data === "ok")
+                            alert("aggiunto nuovo corso");
+                        else if(data === "noData")
+                            alert("inserire professore o materia");
+                        else
+                            alert("ERRORE")
+                    });
+            });
+        });
+        //intercetta bottone per rimuovere professore
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $("#removeprof").click(function () {// on click of getWeatherReport button do ...
+                var prof = document.getElementById("PROFESSORI1").value;//sets "city" to value of "cityName" from DOM
+                $.post("Servlet", {professore: prof, action: "rimuoviProf"}, // POST to WeatherServlet!!
+                    function (data) {   // callBack function
+                        console.log('-' + data + '-');
+                        if(data === "ok")
+                            alert("eliminato professore");
+                        else if(data === "noData")
+                            alert("specificare professore");
+                        else
+                            alert("ERRORE")
+                    });
+            });
+        });
+        //intercetta bottone per rimuovere corso
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $("#removecorso").click(function () {// on click of getWeatherReport button do ...
+                var mat = document.getElementById("CORSI").value;//sets "city" to value of "cityName" from DOM
+                $.post("Servlet", {materia: mat, action: "rimuoviCorso"}, // POST to WeatherServlet!!
+                    function (data) {   // callBack function
+                        console.log('-' + data + '-');
+                        if(data === "ok")
+                            alert("eliminato insegnamento di: " + mat);
+                        else if(data === "noData")
+                            alert("specificare materia");
+                        else
+                            alert("ERRORE")
+                    });
+            });
+        });
+
+    }
+
+    function profilo() {
+        var p = "<div class=\"media\">\n" +
+            "  <img src=\"immagini/download.png\" class=\"align-self-start mr-3\" style=\"max-width:100px\" alt=\"...\">\n" +
+            "  <div class=\"media-body\">\n" +
+            "    <h5 class=\"mt-0\">Dati personali</h5>\n" +
+            "       <form method=\"post\"/>\n"+
+            "           <table class=\"table table-borderless\">\n" +
+            "               <tbody>\n" +
+            "                   <tr>\n" +
+            "                       <th scope=\"row\">Nome</th>\n" +
+            "                       <td> <div id=\"nome\" class=\"outputTextArea\"></div> </td>\n" +
+            "                   </tr>\n" +
+            "                   <tr>\n" +
+            "                       <th scope=\"row\">Cognome</th>\n" +
+            "                       <td> <div id=\"cognome\" class=\"outputTextArea\"></div> </td>\n" +
+            "                   </tr>\n" +
+            "                   <tr>\n" +
+            "                       <th scope=\"row\">Email</th>\n" +
+            "                       <td> <div id=\"email\" class=\"outputTextArea\"></div> </td>\n" +
+            "                   </tr>\n" +
+            "               </tbody>\n" +
+            "           </table>" +
+            "       </form>\n"+
+            "  </div>\n" +
+            "</div>\n";
+        document.getElementById("pagina").innerHTML = p;
+        $(document).ready(function () { // When the DOM of this page is constructed
+            $.post("Servlet", {action: "datipersonali"}, // POST to WeatherServlet!!
+                function (data) {   // callBack function
+                    console.log('-' + data + '-');
+                    obj = JSON.parse(data);
+                    if (obj.Utente != null) {
+                        $("#nome").html(obj.Utente["nome"]); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                        $("#cognome").html(obj.Utente["cognome"]); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                        $("#email").html(obj.Utente["email"]); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+                    }else{
+                        alert("ERRORE RICEZIONE UTENTE")
+                    }
+                });
+        });
+    }
+
+    //recupera materie per selta ripetizione
+    $(document).ready(function () { // When the DOM of this page is constructed
+        $.post("Servlet", {action: "corsi"}, // POST to WeatherServlet!!
+            function (data) {// callBack function
+                console.log('-' + data + '-');
+                obj = JSON.parse(data);
+                var d = "<div id=\"corsi\" class=\"input-group mb-3\">\n" +
+                    "<div class=\"input-group-prepend\">\n" +
+                    "<label class=\"input-group-text\" for=\"MATERIE\">Materie</label>\n" +
+                    "</div>\n" +
+                    "<select class=\"custom-select\" id=\"MATERIE\" name=\"MATERIE\">"+
+                    "<option selected>materia</option>\n";
+                for (var i = 0; i < obj.Corsi.length; i++) {
+                    var counter = obj.Corsi[i];
+                    d += "<option>" + counter.materia+ "</option>\n";
+                }
+                d+= "</select>\n" +
+                    "</div>";
+                $("#outCorsi").html(d); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+            });
+    });
+
+    //recupera professori per selta ripetizione
+    $(document).ready(function () { // When the DOM of this page is constructed
+        $.post("Servlet", {action: "docenti"}, // POST to WeatherServlet!!
+            function (data) {// callBack function
+                console.log('-' + data + '-');
+                obj = JSON.parse(data);
+                var c = "<div id=\"docenti\" class=\"input-group mb-3\">\n" +
+                        "<div class=\"input-group-prepend\">\n" +
+                        "<label class=\"input-group-text\" for=\"PROFESSORI\">Professori</label>\n" +
+                        "</div>\n" +
+                        "<select class=\"custom-select\" id=\"PROFESSORI\" name=\"PROFESSORI\">\n"+
+                        " <option selected>professore</option>";
+                for (var i = 0; i < obj.Docenti.length; i++) {
+                    var counter = obj.Docenti[i];
+                    c += "<option value=\""+ counter.ID +"\">" + counter.NOME + " " + counter.COGNOME +"</option>\n";
+                }
+                c+= "</select>\n" +
+                    "</div>";
+                $("#outDocenti").html(c); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+            });
+    });
+
+    //effettua logout da pagina
+    $(document).ready(function () { // When the DOM of this page is constructed
+        $("#logout").click(function () {// on click of getWeatherReport button do ...
+            $.post("Servlet", {action: "logout"}, // POST to WeatherServlet!!
+                function (data) {   // callBack function
+                    console.log('-' + data + '-');
+                    if (data === 'ok') {
+                        document.location.href = "index.html";
+                    }else{
+                        alert("ERRORE");
+                    }
+                });
+        });
+    });
+
+    //recupera nome utente per nav-bar
+    $(document).ready(function () { // When the DOM of this page is constructed
+        $.post("Servlet", {action: "nomeUtente"}, // POST to WeatherServlet!!
+            function (data) {   // callBack function
+                $("#username").html(data); // Select element weatherReport (by ID) and insert dynamic content (data) into it
+            });
+    });
+
+
+
+</script>
+
+</body>
+</html>
