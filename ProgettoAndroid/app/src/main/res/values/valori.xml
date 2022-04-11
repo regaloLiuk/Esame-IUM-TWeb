@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="prof">
+        <item value="professore">professore</item>
+
+    </string-array>
+
+    <string-array name="mat">
+        <item value="materia">materia</item>
+    </string-array>
+
+    <string-array name="ora">
+        <item value="ora">ora</item>
+        <item value="15">15</item>
+        <item value="16">16</item>
+        <item value="17">17</item>
+        <item value="18">18</item>
+        <item value="19">19</item>
+    </string-array>
+
+    <string-array name="gg">
+        <item value="giorno">giorno</item>
+        <item value="lunedi">lunedì</item>
+        <item value="martedi">martedì</item>
+        <item value="mercoledi">mercoledì</item>
+        <item value="giovedi">giovedì</item>
+        <item value="venerdi">venerdì</item>
+    </string-array>
+
+
+</resources>

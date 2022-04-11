@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/border"
+    android:layout_gravity="center_horizontal|center_vertical"
+
+   >
+
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/prof"
+        android:textColor="#010101"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/mat"
+        android:textColor="#010101"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/gg"
+        android:textColor="#010101"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/ora"
+        android:textColor="#010101"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/stato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+
+    <Button
+        android:padding="5dp"
+        android:text="Modifica"
+        android:id="@+id/modifica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_gravity="right"/>
+
+</LinearLayout>
